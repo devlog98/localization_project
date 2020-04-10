@@ -26,7 +26,7 @@ namespace Locallies.Tools {
         //window behaviour
         private void OnGUI() {
             //begin scroll
-            scrollPosition = BeginScrollView(); 
+            scrollPosition = BeginScrollView();
 
             //if file is loaded...
             if (localizationData != null) {
@@ -37,7 +37,12 @@ namespace Locallies.Tools {
 
                 //apply changes
                 serializedObject.ApplyModifiedProperties();
+            }
 
+            //begin horizontal layout
+            GUILayout.BeginHorizontal();
+
+            if (localizationData != null) {
                 //save file button
                 if (GUILayout.Button("Save File")) {
                     SaveLocalizationFile();
@@ -50,12 +55,13 @@ namespace Locallies.Tools {
             }
 
             //new file button
-            if (GUILayout.Button("Load File")) {
+            if (GUILayout.Button("New File")) {
                 NewLocalizationFile();
             }
 
-            //end scroll
-            EndScrollView(); 
+            //end horizontal layout and scroll
+            GUILayout.EndHorizontal();
+            EndScrollView();
         }
 
         //creates new file
@@ -96,7 +102,7 @@ namespace Locallies.Tools {
             //window size properties
             float windowWidth = this.position.width;
             float windowHeight = this.position.height;
-            
+
             //returns scroll position
             return GUILayout.BeginScrollView(scrollPosition, horizontalScroll, verticalScroll, GUILayout.Width(windowWidth), GUILayout.Height(windowHeight));
         }
