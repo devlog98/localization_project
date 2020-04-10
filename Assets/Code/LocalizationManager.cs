@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -12,13 +11,13 @@ namespace Locallies.Core {
     public class LocalizationManager : MonoBehaviour {
         public static LocalizationManager instance; //singleton instance to be used anywhere
 
-        Dictionary<string, string> localDictionary; //current loaded dictionary containing all translated sentences
-        string localFilename; //the name of the current file loaded on local dictionary
-        string missingKey = "Localized string not found!"; //text to be displayed when key is not found on local dictionary
-        bool isReady; //if local dictionary received all keys and now can translate sentences
+        private Dictionary<string, string> localDictionary; //current loaded dictionary containing all translated sentences
+        private string localFilename; //the name of the current file loaded on local dictionary
+        private string missingKey = "Localized string not found!"; //text to be displayed when key is not found on local dictionary
+        private bool isReady; //if local dictionary received all keys and now can translate sentences
 
         //singleton setup
-        void Awake() {
+        private void Awake() {
             if (instance != null && instance != this) {
                 Destroy(this.gameObject);
             }
