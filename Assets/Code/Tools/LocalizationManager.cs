@@ -30,20 +30,18 @@ namespace Locallies.Tools {
                 instance = this;
             }
 
-            LoadLocalizationFile("en.json");
+            LoadLocalizationFile("en.yml");
         }
 
         // loads data from Localization File into dictionary
         public void LoadLocalizationFile(string filename) {
             //searches Localization File
             string filepath = Path.Combine(Application.streamingAssetsPath, filename);
+
+            LocalizationData localizationData = LocalizationParser.ReadLocalizationFile(filepath);
             
             //if found, else...
-            if (File.Exists(filepath)) {
-                //interprets file data
-                string jsonData = File.ReadAllText(filepath);
-                LocalizationData localizationData = JsonUtility.FromJson<LocalizationData>(jsonData);
-
+            if (localizationData != null) {
                 //creates and populates dictionary
                 localDictionary = new Dictionary<string, string>();
                 foreach (LocalizationItem item in localizationData.items) {

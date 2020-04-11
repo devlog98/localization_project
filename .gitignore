@@ -4,3 +4,5 @@
 /.vs
 /obj
 /Assembly-CSharp-Editor.csproj
+/YamlDotNet.csproj
+/YamlDotNet.Examples.csproj

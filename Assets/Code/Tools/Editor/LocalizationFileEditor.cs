@@ -14,6 +14,10 @@ namespace Locallies.Tools {
         //data from the Localization File
         public LocalizationData localizationData;
 
+        //current file properties
+        private string filename = "language";
+        private string fileExtension = "json";
+
         // window scroll position
         private Vector2 scrollPosition;
 
@@ -72,24 +76,23 @@ namespace Locallies.Tools {
         //saves current file
         private void SaveLocalizationFile() {
             //save window
-            string filepath = EditorUtility.SaveFilePanel("Save Localization File", Application.streamingAssetsPath, "language", "json");
+            string filepath = EditorUtility.SaveFilePanel("Save Localization File", Application.streamingAssetsPath, filename, fileExtension);
 
             //if valid path, save data onto Localization File
             if (!String.IsNullOrEmpty(filepath)) {
-                string jsonData = JsonUtility.ToJson(localizationData);
-                File.WriteAllText(filepath, jsonData);
+                LocalizationParser.WriteLocalizationFile(filepath, localizationData);
             }
         }
 
         //loads file
         private void LoadLocalizationFile() {
             //load window
-            string filepath = EditorUtility.OpenFilePanel("Load Localization File", Application.streamingAssetsPath, "json");
+            string filepath = EditorUtility.OpenFilePanel("Load Localization File", Application.streamingAssetsPath, "*json;*yml");
+            localizationData = LocalizationParser.ReadLocalizationFile(filepath);
 
-            //if valid path, load data from Localization File
-            if (!String.IsNullOrEmpty(filepath)) {
-                string jsonData = File.ReadAllText(filepath);
-                localizationData = JsonUtility.FromJson<LocalizationData>(jsonData);
+            if (localizationData != null) {
+                filename = Path.GetFileNameWithoutExtension(filepath);
+                fileExtension = Path.GetExtension(filepath).Replace(".", "");
             }
         }
 
