@@ -3,5 +3,3 @@ items:
   value: Wello, Horld!
 - key: test
   value: My test!
-- key: another_test
-  value: Testing once again!

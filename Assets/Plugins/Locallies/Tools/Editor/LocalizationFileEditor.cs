@@ -71,6 +71,7 @@ namespace Locallies.Tools {
         //creates new file
         private void NewLocalizationFile() {
             localizationData = new LocalizationData();
+            filename = "New Localization File";
         }
 
         //saves current file
@@ -78,9 +79,14 @@ namespace Locallies.Tools {
             //save window
             string filepath = EditorUtility.SaveFilePanel("Save Localization File", Application.streamingAssetsPath, filename, fileExtension);
 
-            //if valid path, save data onto Localization File
-            if (!String.IsNullOrEmpty(filepath)) {
-                LocalizationParser.WriteLocalizationFile(filepath, localizationData);
+            //operation
+            bool success = LocalizationParser.WriteLocalizationFile(filepath, localizationData);
+
+            //if operation successful...
+            if (success) {
+                //store file properties
+                filename = Path.GetFileNameWithoutExtension(filepath);
+                fileExtension = Path.GetExtension(filepath).Replace(".", "");
             }
         }
 
@@ -88,9 +94,13 @@ namespace Locallies.Tools {
         private void LoadLocalizationFile() {
             //load window
             string filepath = EditorUtility.OpenFilePanel("Load Localization File", Application.streamingAssetsPath, "*json;*yml");
-            localizationData = LocalizationParser.ReadLocalizationFile(filepath);
 
-            if (localizationData != null) {
+            //operation
+            bool success = LocalizationParser.ReadLocalizationFile(filepath, out localizationData);
+
+            //if operation successful...
+            if (success) {
+                //store file properties
                 filename = Path.GetFileNameWithoutExtension(filepath);
                 fileExtension = Path.GetExtension(filepath).Replace(".", "");
             }
