@@ -1,19 +1,19 @@
 ﻿using Locallies.Core;
-using UnityEngine.UI;
+using TMPro;
 
 /*
- * Localizes element of type Text
- * Put this script into a Text object to use it
+ * Localizes element of type TextMeshPro
+ * Put this script into a TextMeshPro object to use it
 */
 
 namespace Locallies.Tools {
-    public class LocalizeText : LocalizeObject {
-        // reference of Text object
-        private Text element;
+    public class LocalizeTextMeshPro : LocalizeObject {
+        // reference of TextMeshPro object
+        private TextMeshProUGUI element;
 
         // initial localization
         private void Start() {
-            element = GetComponent<Text>();
+            element = GetComponent<TextMeshProUGUI>();
             Localize();
         }
 

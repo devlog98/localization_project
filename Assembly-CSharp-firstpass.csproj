@@ -68,6 +68,7 @@
     <Compile Include="Assets\Plugins\Locallies\Core\LocalizeObject.cs" />
     <Compile Include="Assets\Plugins\Locallies\Tools\LocalizationManager.cs" />
     <Compile Include="Assets\Plugins\Locallies\Tools\LocalizeText.cs" />
+    <Compile Include="Assets\Plugins\Locallies\Tools\LocalizeTextMeshPro.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/DNO19_000/Documents/Projetos/localization_project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
