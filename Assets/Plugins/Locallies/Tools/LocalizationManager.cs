@@ -14,6 +14,7 @@ namespace Locallies.Tools {
         //singleton instance
         public static LocalizationManager instance;
 
+        // event that triggers element localization
         public static event Action<bool> MassLocalizationEvent = delegate { };
 
         //dictionary with data and related attributes
@@ -69,6 +70,7 @@ namespace Locallies.Tools {
             isReady = true;
         }
 
+        // localizes all elements listening to event
         public void MassLocalize() {
             MassLocalizationEvent(true);
         }
