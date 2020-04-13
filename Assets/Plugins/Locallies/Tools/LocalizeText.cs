@@ -11,14 +11,21 @@ namespace Locallies.Tools {
         // reference of Text object
         private Text element;
 
+        private void OnEnable() {
+            LocalizationManager.MassLocalizationEvent += Localize;
+        }
+        private void OnDisable() {
+            LocalizationManager.MassLocalizationEvent -= Localize;
+        }
+
         // initial localization
         private void Start() {
             element = GetComponent<Text>();
-            Localize();
+            //Localize(true);
         }
 
         // updates in game text
-        public override void Localize() {
+        public override void Localize(bool canLocalize) {
             element.text = LocalizationManager.instance.Localize(key);
         }
     }

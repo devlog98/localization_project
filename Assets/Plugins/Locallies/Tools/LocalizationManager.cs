@@ -1,4 +1,5 @@
 ﻿using Locallies.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Locallies.Tools {
     public class LocalizationManager : MonoBehaviour {
         //singleton instance
         public static LocalizationManager instance;
+
+        public static event Action<bool> MassLocalizationEvent = delegate { };
 
         //dictionary with data and related attributes
         private Dictionary<string, string> localDictionary;
@@ -61,6 +64,13 @@ namespace Locallies.Tools {
                 //error debug
                 Debug.LogError("Cannot find Localization File!!");
             }
+            
+            //feedback
+            isReady = true;
+        }
+
+        public void MassLocalize() {
+            MassLocalizationEvent(true);
         }
 
         // gets value from dictionary or returns missing key message

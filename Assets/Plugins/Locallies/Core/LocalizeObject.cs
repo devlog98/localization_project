@@ -12,6 +12,6 @@ namespace Locallies.Core {
         [SerializeField] protected string key;
 
         // updates in game text
-        public abstract void Localize();
+        public abstract void Localize(bool canLocalize);
     }
 }
