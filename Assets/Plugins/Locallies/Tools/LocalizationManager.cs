@@ -33,9 +33,11 @@ namespace Locallies.Tools {
             else {
                 instance = this;
             }
+        }
 
-            //line used to test file loading
-            LoadLocalizationFile("en.json");
+        //line used to test file loading
+        private void Start() {
+            LoadLocalizationFile("en.yml");
         }
 
         // loads data from Localization File into dictionary
@@ -60,6 +62,11 @@ namespace Locallies.Tools {
 
                 //sucessful debug
                 Debug.Log("Data loaded! Dictionary contains " + localDictionary.Count + " entries!");
+
+
+
+
+                MassLocalize();
             }
             else {
                 //error debug

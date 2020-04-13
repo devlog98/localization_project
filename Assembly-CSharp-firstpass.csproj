@@ -62,10 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\Locallies\Core\LanguageItem.cs" />
     <Compile Include="Assets\Plugins\Locallies\Core\LocalizationData.cs" />
     <Compile Include="Assets\Plugins\Locallies\Core\LocalizationItem.cs" />
     <Compile Include="Assets\Plugins\Locallies\Core\LocalizationParser.cs" />
     <Compile Include="Assets\Plugins\Locallies\Core\LocalizeObject.cs" />
+    <Compile Include="Assets\Plugins\Locallies\Tools\LanguageManager.cs" />
     <Compile Include="Assets\Plugins\Locallies\Tools\LocalizationManager.cs" />
     <Compile Include="Assets\Plugins\Locallies\Tools\LocalizeText.cs" />
     <Compile Include="Assets\Plugins\Locallies\Tools\LocalizeTextMeshPro.cs" />

@@ -12,9 +12,8 @@ namespace Locallies.Tools {
         private Text element;
 
         // initial localization
-        private void Start() {
+        private void Awake() {
             element = GetComponent<Text>();
-            Localize(true);
         }
 
         // updates in game text

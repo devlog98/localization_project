@@ -12,9 +12,8 @@ namespace Locallies.Tools {
         private TextMeshProUGUI element;
 
         // initial localization
-        private void Start() {
+        private void Awake() {
             element = GetComponent<TextMeshProUGUI>();
-            Localize(true);
         }
 
         // updates in game text
