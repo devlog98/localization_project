@@ -9,41 +9,22 @@ using UnityEngine;
  * Put this script into an empty Game Object to use it
 */
 
-namespace Locallies.Tools {
-    public class LocalizationManager : MonoBehaviour {
-        //singleton instance
-        public static LocalizationManager instance;
-
+namespace Locallies.Core {
+    public static class LocalizationManager {
         // event that triggers element localization
         public static event Action<bool> MassLocalizationEvent = delegate { };
 
         //dictionary with data and related attributes
-        private Dictionary<string, string> localDictionary;
-        private string missingKey = "Localized string not found!";
-        private bool isReady;
+        private static Dictionary<string, string> localDictionary;
+        private static string missingKey = "Localized string not found!";
 
-        //stores Localization File name
-        private string localizationFile;
-
-        //singleton setup
-        private void Awake() {
-            if (instance != null && instance != this) {
-                Destroy(this.gameObject);
-            }
-            else {
-                instance = this;
-            }
-        }
-
-        //line used to test file loading
-        private void Start() {
-            LoadLocalizationFile("en.yml");
-        }
+        //Localization File used if none was found
+        private static string defaultLocalizationFile = "en.yml";
 
         // loads data from Localization File into dictionary
-        public void LoadLocalizationFile(string filename) {
+        public static void LoadLocalizationFile(string filename) {
             //searches Localization File
-            string filepath = Path.Combine(Application.streamingAssetsPath, filename);
+            string filepath = Path.Combine(Application.streamingAssetsPath, "Locallies", filename);
 
             //loads data from file
             LocalizationData localizationData = new LocalizationData();
@@ -57,35 +38,33 @@ namespace Locallies.Tools {
                     localDictionary.Add(item.key, item.value);
                 }
 
-                //saves Localization File name
-                localizationFile = filename;
-
                 //sucessful debug
                 Debug.Log("Data loaded! Dictionary contains " + localDictionary.Count + " entries!");
 
-
-
-
+                //activates mass localization
                 MassLocalize();
             }
             else {
                 //error debug
                 Debug.LogError("Cannot find Localization File!!");
             }
-            
-            //feedback
-            isReady = true;
         }
 
         // localizes all elements listening to event
-        public void MassLocalize() {
+        public static void MassLocalize() {
             MassLocalizationEvent(true);
         }
 
         // gets value from dictionary or returns missing key message
-        public string Localize(string key) {
-            string result = missingKey;
-            localDictionary.TryGetValue(key, out result);
+        public static string Localize(string key) {
+            //loads default Localization File if no dictionary
+            if (localDictionary == null) {
+                LoadLocalizationFile(defaultLocalizationFile);
+            }
+
+            localDictionary.TryGetValue(key, out string result);
+            result = String.IsNullOrEmpty(result) ? missingKey : result;
+
             return result;
         }
     }

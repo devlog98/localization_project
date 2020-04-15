@@ -1,6 +1,4 @@
 ﻿using Locallies.Tools;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -18,6 +16,11 @@ namespace Locallies.Core {
         }
         protected void OnDisable() {
             LocalizationManager.MassLocalizationEvent -= Localize;
+        }
+
+        // initial localization
+        private void Start() {
+            Localize(true);
         }
 
         // updates in game text

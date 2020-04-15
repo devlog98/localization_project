@@ -11,14 +11,14 @@ namespace Locallies.Tools {
         // reference of Text object
         private Text element;
 
-        // initial localization
+        // initial setup
         private void Awake() {
             element = GetComponent<Text>();
         }
 
         // updates in game text
         public override void Localize(bool canLocalize) {
-            element.text = LocalizationManager.instance.Localize(key);
+            element.text = LocalizationManager.Localize(key);
         }
     }
 }

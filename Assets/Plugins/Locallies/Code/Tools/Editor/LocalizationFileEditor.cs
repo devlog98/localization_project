@@ -24,11 +24,16 @@ namespace Locallies.Tools {
         //initializes window at path
         [MenuItem("Window/Locallies/Localization File Editor")]
         private static void Init() {
-            EditorWindow.GetWindow(typeof(LocalizationFileEditor)).Show();
+            EditorWindow.GetWindow(typeof(LocalizationFileEditor), false, "Localization File Editor", true).Show();
         }
 
         //window behaviour
         private void OnGUI() {
+            //title
+            GUILayout.Label("Localization File Editor", EditorStyles.boldLabel);
+            GUILayout.Label("You can edit and create Localization Files using the buttons below", EditorStyles.label);
+            GUILayout.Label("");
+
             //begin scroll
             scrollPosition = BeginScrollView();
 
