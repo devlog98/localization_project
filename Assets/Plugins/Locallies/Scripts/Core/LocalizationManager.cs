@@ -24,7 +24,7 @@ namespace Locallies.Core {
         // loads data from Localization File into dictionary
         public static void LoadLocalizationFile(string filename) {
             //searches Localization File
-            string filepath = Path.Combine(Application.streamingAssetsPath, "Locallies", filename);
+            string filepath = Path.Combine(Application.streamingAssetsPath, "Localization Files", filename);
 
             //loads data from file
             LocalizationData localizationData = new LocalizationData();

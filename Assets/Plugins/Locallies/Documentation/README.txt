@@ -8,12 +8,6 @@ Locallies is a localization system based on Unity's official Localization tutori
 - Basic UI for the Player to choose a language
 - Built-in editor to edit your Localization Files
 
-## Initial Setup
-- Create a folder called "StreamingAssets" inside "Assets"
-- Move the "Localization Files" folder from "Locallies" to "StreamingAssets"
-
-*Unity Packages can't add files outside "Plugins" folder, so this little setup is needed
-
 ## How to use
 ### Create Localization File
 - Go to "Window/Locallies/Localization File Manager"
