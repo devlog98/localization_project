@@ -39,13 +39,16 @@ namespace Locallies.Core {
         }
 
         //reads data from file
-        public static bool ReadLocalizationFile(string filepath, out LocalizationData localizationData) {
+        public static bool ReadLocalizationFile(string filename, out LocalizationData localizationData) {
             bool success = false;
             localizationData = null;
 
-            //if file is valid...
+            // searches Localization File
+            string filepath = Path.Combine(Application.streamingAssetsPath, "Localization Files", filename);
+
+            // if file is valid...
             if (File.Exists(filepath)) {
-                //read data based on extension
+                // read data based on extension
                 string fileData = File.ReadAllText(filepath);
                 string fileExtension = Path.GetExtension(filepath);
 
@@ -61,7 +64,7 @@ namespace Locallies.Core {
                 success = true;
             }
 
-            //result feedback
+            // result feedback
             return success;
         }
 

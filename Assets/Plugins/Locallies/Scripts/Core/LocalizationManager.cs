@@ -5,47 +5,43 @@ using System.IO;
 using UnityEngine;
 
 /*
- * Singleton used to deliver translations anywhere
- * Put this script into an empty Game Object to use it
+ * Static class used to manage translations anywhere
+ * Responsible for loading files and returning translations
 */
 
 namespace Locallies.Core {
     public static class LocalizationManager {
-        // event that triggers element localization
+        // triggers localization on all elements at scene
         public static event Action<bool> MassLocalizationEvent = delegate { };
 
-        //dictionary with data and related attributes
+        // localized data
         private static Dictionary<string, string> localDictionary;
         private static string missingKey = "Localized string not found!";
 
-        //Localization File used if none was found
+        // default locale to be used
         private static string defaultLocalizationFile = "en.yml";
 
-        // loads data from Localization File into dictionary
+        // loads data from Localization File
         public static void LoadLocalizationFile(string filename) {
-            //searches Localization File
-            string filepath = Path.Combine(Application.streamingAssetsPath, "Localization Files", filename);
-
-            //loads data from file
+            // loads data from file
             LocalizationData localizationData = new LocalizationData();
-            bool success = LocalizationParser.ReadLocalizationFile(filepath, out localizationData);
+            bool success = LocalizationParser.ReadLocalizationFile(filename, out localizationData);
 
-            //if operation successful...
             if (success) {
-                //creates and populates dictionary
+                // creates and populates dictionary
                 localDictionary = new Dictionary<string, string>();
                 foreach (LocalizationItem item in localizationData.items) {
                     localDictionary.Add(item.key, item.value);
                 }
 
-                //sucessful debug
+                // sucessful debug
                 Debug.Log("Data loaded! Dictionary contains " + localDictionary.Count + " entries!");
 
-                //activates mass localization
+                // mass localization
                 MassLocalize();
             }
             else {
-                //error debug
+                // error debug
                 Debug.LogError("Cannot find Localization File!!");
             }
         }
@@ -57,7 +53,7 @@ namespace Locallies.Core {
 
         // gets value from dictionary or returns missing key message
         public static string Localize(string key) {
-            //loads default Localization File if no dictionary
+            // loads default Localization File if no dictionary
             if (localDictionary == null) {
                 LoadLocalizationFile(defaultLocalizationFile);
             }
