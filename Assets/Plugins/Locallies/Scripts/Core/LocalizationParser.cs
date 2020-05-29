@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 using YamlDotNet.Serialization;
 
 /*
@@ -45,11 +46,16 @@ namespace Locallies.Core {
 
             // searches Localization File
             string filepath = Path.Combine(Application.streamingAssetsPath, "Localization Files", filename);
+            UnityWebRequest fileRequest = UnityWebRequest.Get(filepath);
+            fileRequest.SendWebRequest();
+
+            while (!fileRequest.isDone) {}
+
+            string fileData = fileRequest.downloadHandler.text;
 
             // if file is valid...
-            if (File.Exists(filepath)) {
+            if (!String.IsNullOrEmpty(fileData)) {
                 // read data based on extension
-                string fileData = File.ReadAllText(filepath);
                 string fileExtension = Path.GetExtension(filepath);
 
                 switch (fileExtension) {
